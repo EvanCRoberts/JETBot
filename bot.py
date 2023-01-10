@@ -1,5 +1,7 @@
 import discord
 import responses
+import os
+from dotenv import load_dotenv
 
 #These intents are what our Discord bot has permissions to do, like viewing what members are in the
 #server, who is currently active in the server, and what a message says/who it's from.
@@ -17,7 +19,8 @@ async def send_message(message, user_message, username, is_private):
 
 def run_discord_bot():
     #This token is uniquely associated with a bot, and can be changed if needed.
-    TOKEN = ''
+    load_dotenv()
+    TOKEN = os.getenv('TRIAL_BOT_TOKEN')
     
     #client is what our bot interacts through. It needs to be called with intent.
     client = discord.Client(intents=intents)
