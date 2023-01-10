@@ -17,7 +17,7 @@ async def send_message(message, user_message, username, is_private):
 
 def run_discord_bot():
     #This token is uniquely associated with a bot, and can be changed if needed.
-    TOKEN = 'MTA2MDk5NTkzNzE3MTkzMTE2OA.G0GOvo.u_W2xHvjv4gBVWWlY8kTSaOi-eFOLcZKwSBMG4'
+    TOKEN = ''
     
     #client is what our bot interacts through. It needs to be called with intent.
     client = discord.Client(intents=intents)
