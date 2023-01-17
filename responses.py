@@ -16,13 +16,28 @@ def handle_response(message, author) -> str:
         if len(p_message) <= 5:
             return "Woops! You better tell me what size die to roll ya doofus! Try !roll20 "
         dieNum = int(p_message[5:])
+        if dieNum <= 1:
+            return "Woops! Invalid Number of Sides"
         rolled = str(random.randint(1,dieNum))
         ans = author + " has rolled a " + rolled
         return ans
         
     if p_message.startswith('&roll'):
         return "`This is a basic die-rolling function. Type !rollx to roll a die with x faces, 1 - x`"
+
+    if p_message.startswith('!coinflip'):
+        if len(p_message) >= 10:
+            return "Woops! Invalid command ya doofus! Try !coinflip "
+        flip = str(random.randint(1,2))
+        if flip == 2:
+           ans = author + " The coin landed on Tails"
+        else:
+            ans = author +" The coin landed on Heads"
+        return ans
         
+    if p_message.startswith('&coinflip'):
+        return "`This is a coinflip function. Type !coinflip to flip a coin`"
+ 
     if p_message == '!help':
         return "`To make new bot response, go ahead and look into response.py\
                  Most of these should start with an '!' or '&'. ! should be normal commands\
