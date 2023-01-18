@@ -29,7 +29,7 @@ def handle_response(message, author) -> str:
         if len(p_message) >= 10:
             return "Woops! Invalid command ya doofus! Try !coinflip "
         flip = str(random.randint(1,2))
-        if flip == 2:
+        if flip == "2":
            ans = author + " The coin landed on Tails"
         else:
             ans = author +" The coin landed on Heads"
