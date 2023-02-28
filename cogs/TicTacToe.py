@@ -35,7 +35,6 @@ class TicTacToe(commands.Cog):
         await ctx.send("`This is a two player Tictactoe game. Bot does not play it. "
                        "To play type in !tictactoe @opponents username.`")
 
-
     @commands.command()
     async def tictactoe(self, ctx, p2_: discord.Member):
         if p2_ == ctx.author:
@@ -105,6 +104,8 @@ class TicTacToe(commands.Cog):
         global player1
         global player2
         global mark
+        global gameOver
+
         if not gameOver:
 
             if turn == ctx.author:
@@ -125,8 +126,10 @@ class TicTacToe(commands.Cog):
                     self.checkWinner(winningConditions, mark)
 
                     if gameOver:
+                        gameOver = True
                         await ctx.send(mark + "wins!")
                     elif count >= 9:
+                        gameOver = True
                         await ctx.send("It is a tie!")
                     else:
                         if turn == player1:

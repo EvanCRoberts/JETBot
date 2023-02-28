@@ -26,7 +26,5 @@ class HelpMenu(commands.Cog):
     async def hello(self, ctx):
         await ctx.send("Hey There!")
 
-
-
 async def setup(client):
     await client.add_cog(HelpMenu(client))
