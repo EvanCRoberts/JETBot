@@ -20,6 +20,7 @@ class HelpMenu(commands.Cog):
         embed.add_field(name="!subtract num num", value="basic subtraction function", inline=False)
         embed.add_field(name="!multiply num num", value="basic multiplication function", inline=False)
         embed.add_field(name="!divide num num", value="basic division function\n check if num 2 is 0", inline=False)
+        embed.add_field(name="!poll question optX emojiX",value="Supports up to four options",inline=False)
         await ctx.send(embed=embed)
 
     @commands.command()
