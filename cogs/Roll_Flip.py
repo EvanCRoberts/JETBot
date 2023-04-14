@@ -10,13 +10,13 @@ class Roll_Flip(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def roll(self, ctx, dieNum: int):
-        if dieNum <= 5:
+    async def roll(self, ctx, dienum: int = None):
+        if dienum is None:
             await ctx.send("Woops! You better tell me what size die to roll ya doofus! Try !roll20 ")
-        elif dieNum <= 1:
+        elif dienum <= 2:
             await ctx.send("Woops! Invalid Number of Sides")
         else:
-            rolled = str(random.randint(1, dieNum))
+            rolled = str(random.randint(1, dienum))
             await ctx.send("" + str(ctx.author) + " has rolled a " + str(rolled))
 
     @commands.command()
@@ -26,6 +26,7 @@ class Roll_Flip(commands.Cog):
             await ctx.send(str(ctx.author) + " The coin landed on Tails")
         else:
             await ctx.send(str(ctx.author) + " The coin landed on Heads")
+
 
 async def setup(client):
     await client.add_cog(Roll_Flip(client))

@@ -31,16 +31,16 @@ class TicTacToe(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def tictactoe(self, ctx):
-        await ctx.send("`This is a two player Tictactoe game. Bot does not play it. "
-                       "To play type in !tictactoe @opponents username.`")
-
-    @commands.command()
-    async def tictactoe(self, ctx, p2_: discord.Member):
-        if p2_ == ctx.author:
+    async def tictactoe(self, ctx, p2_: discord.Member = None):
+        if p2_ is None:
+            await ctx.send("`This is a two player Tictactoe game. Bot does not play it. "
+                           "To play type in !tictactoe @opponents username.`")
+        elif p2_ == ctx.author:
             await ctx.send("You can not play against yourself!")
+
         elif self.client.user.display_name == p2_.display_name:
             await ctx.send("You can not play against bot!")
+
         else:
             global player1
             global player2
