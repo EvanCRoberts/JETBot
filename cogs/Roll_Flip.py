@@ -11,9 +11,7 @@ class Roll_Flip(commands.Cog):
 
     @commands.command()
     async def roll(self, ctx, dieNum: int):
-        if dieNum <= 5:
-            await ctx.send("Woops! You better tell me what size die to roll ya doofus! Try !roll20 ")
-        elif dieNum <= 1:
+        if dieNum <= 1:
             await ctx.send("Woops! Invalid Number of Sides")
         else:
             rolled = str(random.randint(1, dieNum))
