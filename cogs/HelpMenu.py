@@ -10,6 +10,7 @@ class HelpMenu(commands.Cog):
 
     @commands.command()
     async def help(self, ctx):
+
         embedlist = []
         basic = discord.Embed(color=0x0080ff, type="rich", title="Basic Commands", description="This is the basic commands")
         basic.add_field(name="!help", value="The commands should start with an '!' or a '&'", inline=False)
