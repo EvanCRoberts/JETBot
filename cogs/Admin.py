@@ -1,4 +1,5 @@
 import discord
+import pymysql
 from discord.ext import commands
 from discord.ext.commands import Bot, has_permissions
 from discord import app_commands, guild
@@ -15,10 +16,16 @@ class Admin(commands.Cog):
         if member == None:
             await ctx.send("You Have to Mention a Member")
             return
+
         if reason == None:
             reason = "No reason specified!!"
 
+        if self.client.user.display_name == member.display_name:
+            await ctx.send("Can't kick me with this command")
+
         if member.name != ctx.guild.owner:
+            invitelink = await ctx.channel.create_invite(max_uses=1, unique=True)
+            await member.send(invitelink)
             await member.kick(reason=reason)
             await ctx.send(f"{member} kicked From the Server")
 
@@ -28,16 +35,16 @@ class Admin(commands.Cog):
         if member is None:
             await ctx.send("You Have to Mention a Member")
             return
-        elif reason is None:
+        if reason is None:
             reason = "No reason specified!!"
 
-        elif ctx.author.top_role >= member.top_role:
+        if self.client.user.display_name == member.display_name:
+            await ctx.send("Can't Ban me with this command")
+
+        if ctx.author.top_role >= member.top_role:
             if member.name != ctx.guild.owner:
                 await member.ban(reason=reason)
                 await ctx.send(f"{member} banned From the Server")
-
-        elif self.client.user.display_name == member.display_name:
-            await ctx.send("Can't Kick the me")
 
     @commands.command()
     @has_permissions(ban_members=True)
@@ -46,31 +53,25 @@ class Admin(commands.Cog):
 
         await guild.unban(user=user)
 
-        invitelink = await ctx.channel.create_invite(max_uses=1, unique=True)
-        await user.send(invitelink)
 
     @commands.command()
-    @has_permissions(ban_members=True)
     async def banlist(self, ctx):
         bans = [entry async for entry in ctx.guild.bans(limit=2000)]
-        for ban in bans:
-            await ctx.send(ban)
+        await ctx.send(bans)
 
     @commands.command()
     async def dm(self, ctx, user: discord.Member, message):
         if ctx.author == ctx.guild.owner:
             await user.send(message + " Message by " + str(ctx.author))
 
-    @commands.command()
     @has_permissions(administrator=True)
-    async def invite(self, ctx, user: discord.Member):
+    async def invite(self, ctx, member: discord.Member = None):
         invitelink = await ctx.channel.create_invite(max_uses=1, unique=True)
-        await user.send(invitelink)
+        await member.send(invitelink)
 
-    @invite.error
-    async def invite_error(self, ctx, error):
-        if isinstance(error, commands.CommandError):
-            await ctx.send(error)
+    @commands.command(administrator=True)
+    async def addrole(self, ctx, therole: discord.Role, member: discord.Member = None):
+        await member.add_roles(therole, reason="BotAssigned")
 
     @dm.error
     async def dm_error(self, ctx, error):
