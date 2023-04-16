@@ -44,7 +44,7 @@ class Jokes(commands.Cog):
         #url = "https://dad-jokes.p.rapidapi.com/joke/" + joke
 
         #headers = {
-         #   "X-RapidAPI-Key": "dcc3284dd2msh1cbc19e5745f082p10c94djsn3950312db933",
+         #   "X-RapidAPI-Key": "",
           #  "X-RapidAPI-Host": "dad-jokes.p.rapidapi.com"
         #}
         #joke = requests.request("GET", url, headers=headers)

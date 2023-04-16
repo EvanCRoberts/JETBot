@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import requests, json
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
-API_KEY = '040daecaa1d1e7224250b85e1bc73263'
+API_KEY = ''
 class Weather(commands.Cog):
 
     def __init__(self, client):
